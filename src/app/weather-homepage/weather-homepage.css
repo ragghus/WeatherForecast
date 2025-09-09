@@ -1,0 +1,22 @@
+.search-section {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+}
+
+.inputfield {
+    margin-right: 10px;    
+}
+
+.label-or {
+    margin-right: 10px;
+    font-size: medium;
+    color: gray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.result-tabs {
+    margin-top: 20px;
+}

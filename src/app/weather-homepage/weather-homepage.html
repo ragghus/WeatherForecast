@@ -1,0 +1,18 @@
+<head>
+    <link rel="stylesheet" href="weather-homepage.css"/>
+</head>
+<header>
+    <section class="search-section">
+        <input [(ngModel)]="city" class="inputfield" type="text" placeholder="Enter the city name"/>
+        <label class="label-or">Or</label>
+        <input [(ngModel)]="lat" class="inputfield" type="text" placeholder="Enter the latitude"/>
+        <input [(ngModel)]="long" class="inputfield" type="text" placeholder="Enter the longitude"/>
+        <button class="button-search" type="button" (click)="searchCity()">Search</button>
+    </section>  
+</header>
+<main>
+    <section class="result-tabs">
+        <app-forecast-results></app-forecast-results>
+    </section>
+</main>  
+

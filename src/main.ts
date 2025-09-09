@@ -1,6 +1,11 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import 'zone.js';
+import { bootstrapApplication, provideProtractorTestingSupport } from '@angular/platform-browser';
 import { App } from './app/app';
+import routeConfig from './app/routes';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(App, {
+  providers: [provideProtractorTestingSupport(), provideRouter(routeConfig), provideHttpClient()],
+}).catch((err) => console.error(err));
+

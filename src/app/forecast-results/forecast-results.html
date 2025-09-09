@@ -1,0 +1,74 @@
+<head>
+    <link rel="stylesheet" href="forecast-results.css"/>
+</head>
+
+<main>
+        <div class='tab-button'>
+            <button [class.active]="selectedTab==='current'" type="button" (click)="cityService.selectTab('current')">Current Weather</button>
+            <label>|</label>
+            <button [class.active]="selectedTab==='5-day'" type="button" (click)="cityService.selectTab('5-day')">5-Day Forecast</button>
+            <label>|</label>
+            <button [class.active]="selectedTab==='15-day'" type="button" (click)="cityService.selectTab('15-day')">15-Day Forecast</button>
+        </div>
+
+    @if(errorMessage) {
+        <div class="errorMessage">
+            <p>{{errorMessage}}</p>
+        </div>
+    }
+
+    @if(loading) {
+        <div>
+            <label>Loading...</label>
+        </div>
+    }
+
+    @if (weatherData) {
+        <div class="currentWeather">
+            <h2>{{weatherData.name}}</h2>
+            <p>{{weatherData.main.temp}}°C</p>
+            <p>{{weatherData.weather[0].description}}</p>        
+        </div>
+    }
+    @else if (selectedTab=="current" && weatherData==null) {
+            <p class="currentWeather">Search a city to see the current weather details.</p>
+          }
+
+    @if (selectedTab=="5-day" && fiveDayForecast?.length) {
+            <div class="forecast-grid">
+              @for (day of fiveDayForecast; track day.date) {
+                <div class="forecast-card">                  
+                  <div class="date">{{ day.date | date:'EEE, MMM d' }}
+                  <br>
+                  <div class="minmax">
+                    <span>Min {{ day.min | number:'1.0-0' }}°C</span>
+                    <span>Max {{ day.max | number:'1.0-0' }}°C</span>
+                  </div>
+                   </div>
+                </div>
+              }
+            </div>
+    } @else if(selectedTab=='5-day' && fiveDayForecast==null) {
+            <p>Search a city to see the 5-day forecast.</p>
+      }
+
+    @if (selectedTab == '15-day' && sixteenDayForecast?.length ) {
+      <div class="forecast-grid">
+        @for (day of sixteenDayForecast; track day.date) {
+          <div class="forecast-card">
+          <div class="date">{{day.date | date: 'EEE, MMM d'}}
+            <br>
+            <div class="minmax">
+              <span>Min {{day.min | number:'1.0-0'}}°C</span>
+              <span>Max {{day.max | number:'1.0-0'}}°C</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>      
+    }
+    @else if(selectedTab=='15-day' && sixteenDayForecast==null) {
+            <p>Search a city to see the 15-day forecast.</p>
+      }
+</main>
+
